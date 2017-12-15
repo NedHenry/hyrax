@@ -83,8 +83,10 @@ RSpec.describe Hyrax::AdminSetSearchBuilder do
 
     context "when searching for deposit access" do
       let(:access) { :deposit }
-      let(:permission_template1) { create(:permission_template, source_id: 7, source_type: 'admin_set') }
-      let(:permission_template2) { create(:permission_template, source_id: 8, source_type: 'admin_set') }
+      let(:admin_set1) { create(:admin_set) }
+      let(:admin_set2) { create(:admin_set) }
+      let(:permission_template1) { create(:permission_template, source_id: admin_set1.id, source_type: 'admin_set') }
+      let(:permission_template2) { create(:permission_template, source_id: admin_set2.id, source_type: 'admin_set') }
       let(:permission_template3) { create(:permission_template, source_id: 9, source_type: 'admin_set') }
 
       before do
@@ -107,7 +109,7 @@ RSpec.describe Hyrax::AdminSetSearchBuilder do
       end
 
       it 'is successful' do
-        expect(subject['fq']).to eq ["{!terms f=id}7,8", "{!terms f=has_model_ssim}AdminSet"]
+        expect(subject['fq']).to eq ["{!terms f=id}#{admin_set1.id},#{admin_set2.id}", "{!terms f=has_model_ssim}AdminSet"]
       end
     end
   end
