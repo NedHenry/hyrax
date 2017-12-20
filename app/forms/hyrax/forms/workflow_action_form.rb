@@ -34,7 +34,7 @@ module Hyrax
         true
       end
 
-      validates :name, presence: true
+      validates :name, :comment, presence: true
       validate :authorized_for_processing
 
       def authorized_for_processing

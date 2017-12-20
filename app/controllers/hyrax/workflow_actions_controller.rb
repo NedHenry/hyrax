@@ -7,7 +7,7 @@ module Hyrax
         after_update_response
       else
         respond_to do |wants|
-          wants.html { render 'hyrax/base/unauthorized', status: :unauthorized }
+          wants.html { redirect_to [main_app, curation_concern], alert: "Invalid submission: comment required." }
           wants.json { render_json_response(response_type: :unprocessable_entity, options: { errors: curation_concern.errors }) }
         end
       end
