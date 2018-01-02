@@ -21,10 +21,8 @@ module Qa::Authorities
 
       def search_builder(controller)
         access = controller.params[:access] || 'read'
-        search_builder_class.new(controller)
-                            .where(controller.params[:q])
-                            .with_access(access)
-                            .rows(100)
+        search_builder_class.new([], controller, access)
+                            .where(controller.params[:q]).rows(100)
       end
   end
 end

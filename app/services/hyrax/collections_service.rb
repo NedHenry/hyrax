@@ -20,9 +20,8 @@ module Hyrax
     private
 
       def list_search_builder(access)
-        list_search_builder_class.new(context)
+        list_search_builder_class.new([], context, access)
                                  .rows(100)
-                                 .with_access(access)
       end
   end
 end
